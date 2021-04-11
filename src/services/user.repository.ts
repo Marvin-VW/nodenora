@@ -49,7 +49,6 @@ export class UserRepository {
         await this.postgress.query(`UPDATE appuser SET noderedversion = noderedversion + 1 WHERE uid = $1`, uid);
     }
 }
-
 (async function () {
     const service = new PostgressService();
     await service.query(`
@@ -59,14 +58,8 @@ export class UserRepository {
         )`
     );
 
-    // await service.query('ALTER TABLE appuser ADD COLUMN noderedversion integer DEFAULT 1');
-    await service.query('ALTER TABLE appuser ADD COLUMN refreshToken integer DEFAULT 1');
-    // const repo = new UserRepository(service);
-    // await repo.incrementNoderedTokenVersion('ARcEql2ileYghxMOstan2bOsSEj1');
-    // const users = await service.query('select * from appuser');
-
-    // console.log(await repo.getUser('ARcEql2ileYghxMOstan2bOsSEj1'));
-
+    await service.query('ALTER TABLE appuser ADD COLUMN IF NOT EXISTS noderedversion integer DEFAULT 1');
+	await service.query('ALTER TABLE appuser ADD COLUMN IF NOT EXISTS refreshtoken integer DEFAULT 1');
 })().catch(err => {
     console.error(err);
 }).then(() => {
