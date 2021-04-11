@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "sourceMap": false,
+        "importHelpers": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "noUnusedLocals": true,
+        "noImplicitAny": false,
+        "target": "es2017",
+        "outDir": "./build"
+    }
+}
